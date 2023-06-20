@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryDemo.Core.Contract.Services
 {
-    public interface IRecordServiceAync
+    public interface IRecordServiceAsync
     {
         Task<IEnumerable<RecordResponseModel>> GetAllAsync();
         Task<int> AddRecordAsync(RecordRequestModel record);

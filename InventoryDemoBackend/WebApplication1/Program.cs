@@ -1,6 +1,8 @@
 using InventoryDemo.Core.Contract.Repositories;
+using InventoryDemo.Core.Contract.Services;
 using InventoryDemo.Infrastructure.Data;
 using InventoryDemo.Infrastructure.Repository;
+using InventoryDemo.Infrastructure.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,17 @@ builder.Services.AddDbContext<InventoryDemoDbContext>(option => {
     //this need for migrations
     option.UseSqlServer(builder.Configuration.GetConnectionString("InventoryDemoDb")); // this line of code help Program.cs locate the connection string in appsetting.json
 });
+// dependency injection
 builder.Services.AddScoped<IRecordRepositoryAsync, RecordRepositoryAsync>();
+builder.Services.AddScoped<IMachineRepositoryAsync, MachineRepositoryAsync>();
+builder.Services.AddScoped<IMaterialRepositoryAsync, MaterialRepositoryAsync>();
+builder.Services.AddScoped<IOperatorRepositoryAsync, OperatorRepositoryAsync>();
+
+builder.Services.AddScoped<IRecordServiceAsync, RecordServiceAync>();
+builder.Services.AddScoped<IMachineServiceAsync, MachineServiceAsync>();
+builder.Services.AddScoped<IMaterialServiceAsync, MaterialServiceAsync>();
+builder.Services.AddScoped<IOperatorServiceAsync, OperatorServiceAsync>();
+
 
 var app = builder.Build();
 

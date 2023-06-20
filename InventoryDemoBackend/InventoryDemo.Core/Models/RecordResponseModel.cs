@@ -9,13 +9,12 @@ namespace InventoryDemo.Core.Models
 {
     public class RecordResponseModel
     {
-        public int POnumber { get; set; }
+        public int POnumber { get; set; } //this is the ID to distinguish orders from others
         public int OrderNumber { get; set; }
-        public string OperatorName { get; set; }
-        public DateTime OperatorDatetime { get; set; }
-        public DateTime? Modifytime { get; set; }
-        public string MachineName { get; set; }
-        public int LOTnumber { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime DueDate { get; set; }
+        public DateTime CompleteDate { get; set; }
+        public string LOTnumber { get; set; }
         public int ProductCode { get; set; }
     }
 }

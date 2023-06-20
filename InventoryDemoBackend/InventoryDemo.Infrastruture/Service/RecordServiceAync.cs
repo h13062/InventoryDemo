@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InventoryDemo.Infrastructure.Service
 {
-    public class RecordServiceAync : IRecordServiceAync
+    public class RecordServiceAync : IRecordServiceAsync
     {
         private readonly IRecordRepositoryAsync _recordRepositoryAsync;
         public RecordServiceAync(IRecordRepositoryAsync recordRepositoryAsync)
@@ -19,102 +19,77 @@ namespace InventoryDemo.Infrastructure.Service
             _recordRepositoryAsync = recordRepositoryAsync;
         }
 
-        public Task<int> AddRecordAsync(RecordRequestModel record)
+        public async Task<int> AddRecordAsync(RecordRequestModel record)
         {
-            throw new NotImplementedException();
+            Records r = new Records();
+            r.POnumber = record.POnumber;
+            r.OrderNumber = record.OrderNumber;
+            r.OrderDate = record.OrderDate;
+            r.DueDate = record.DueDate;
+            r.CompleteDate = record.CompleteDate;
+            r.LOTnumber = record.LOTnumber;
+            r.ProductCode = record.ProductCode;
+            return await _recordRepositoryAsync.InsertAsync(r);
         }
-
-        //public async Task<int> AddRecordAsync(RecordRequestModel record)
-        //{
-        //    Records r = new Records();
-        //    r.PO = record.PO;
-        //    r.orderNumber = record.orderNumber;
-        //    r.operatorName = record.operatorName;
-        //    r.operatorDatetime = DateTime.Parse(record.operatorDatetime);
-        //   // r.modifyDatetime = record.modifyDatetime;
-        //    r.machineName = record.machineName;
-        //    r.LOTnumber = record.LOTnumber;
-        //    r.productCode = record.productCode;
-        //    return await _recordRepositoryAsync.InsertAsync(r);
-        //}
-
         public async Task<int?> DeleteByIdAsync(int id)
         {
             return await _recordRepositoryAsync.DeleteAsync(id);
         }
 
-        public Task<IEnumerable<RecordResponseModel>> GetAllAsync()
+        public async Task<IEnumerable<RecordResponseModel>?> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var collection = await _recordRepositoryAsync.GetAllAsync();
+            if (collection != null)
+            {
+                List<RecordResponseModel> result = new List<RecordResponseModel>();
+                foreach (var item in collection)
+                {
+                    RecordResponseModel model = new RecordResponseModel();
+                    model.POnumber = item.POnumber;
+                    model.OrderNumber = item.OrderNumber;
+                    model.OrderDate = item.OrderDate;
+                    model.DueDate = item.DueDate;
+                    model.CompleteDate = item.CompleteDate;
+                    model.LOTnumber = item.LOTnumber;
+                    model.ProductCode = item.ProductCode;
+                    result.Add(model);
+
+                }
+                return result;
+            }
+            return null;
         }
 
-        public Task<RecordResponseModel> GetByIdAsync(int id)
+        public async Task<RecordResponseModel?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var item = await _recordRepositoryAsync.GetByIdAsync(id);
+            if (item != null)
+            {
+                RecordResponseModel model = new RecordResponseModel();
+                model.POnumber = item.POnumber;
+                model.OrderNumber = item.OrderNumber;
+                model.OrderDate= item.OrderDate;
+                model.DueDate= item.DueDate;
+                model.CompleteDate= item.CompleteDate;
+                model.LOTnumber= item.LOTnumber;
+                model.ProductCode= item.ProductCode;
+                return model;
+            }
+            return null;
         }
 
-        public Task<int> UpdateRecordAsync(RecordRequestModel record)
+        public async Task<int> UpdateRecordAsync(RecordRequestModel record)
         {
-            throw new NotImplementedException();
+            Records r = new Records();
+            r.POnumber = record.POnumber;
+            r.OrderNumber = record.OrderNumber;
+            r.OrderDate = record.OrderDate;
+            r.DueDate = record.DueDate;
+            r.CompleteDate = record.CompleteDate;
+            r.LOTnumber = record.LOTnumber;
+            r.ProductCode = record.ProductCode;
+            return await _recordRepositoryAsync.UpdateAsync(r);
         }
-
-        //public async Task<IEnumerable<RecordResponseModel>> GetAllAsync()
-        //{
-        //    var collection = await _recordRepositoryAsync.GetAllAsync();
-        //    if (collection != null)
-        //    {
-        //        List<RecordResponseModel> result = new List<RecordResponseModel>();
-        //        foreach (var item in collection)
-        //        {
-        //            RecordResponseModel model = new RecordResponseModel();
-        //            model.PO = item.PO;
-        //            model.orderNumber = item.orderNumber;
-        //            model.operatorName = item.operatorName;
-        //            model.operatorDatetime = item.operatorDatetime;
-        //            // model.modifyDatetime = record.modifyDatetime;
-        //            model.machineName = item.machineName;
-        //            model.LOTnumber = item.LOTnumber;
-        //            model.productCode = item.productCode;
-
-        //            result.Add(model);
-        //        }
-        //        return result;
-        //    }
-        //    return null;
-        //}
-
-        //public async Task<RecordResponseModel> GetByIdAsync(int id)
-        //{
-        //    var item = await _recordRepositoryAsync.GetByIdAsync(id);
-        //    if (item != null)
-        //    {
-        //        RecordResponseModel model = new RecordResponseModel();
-        //        model.PO = item.PO;
-        //        model.orderNumber = item.orderNumber;
-        //        model.operatorName = item.operatorName;
-        //        model.operatorDatetime = item.operatorDatetime;
-        //        // model.modifyDatetime = record.modifyDatetime;
-        //        model.machineName = item.machineName;
-        //        model.LOTnumber = item.LOTnumber;
-        //        model.productCode = item.productCode;
-        //        return model;
-        //    }
-        //    return null;
-        //}
-
-        //public async Task<int> UpdateRecordAsync(RecordRequestModel record)
-        //{
-        //    Records r = new Records();
-        //    r.PO = record.PO;
-        //    r.orderNumber = record.orderNumber;
-        //    r.operatorName = record.operatorName;
-        //    r.operatorDatetime = DateTime.Parse(record.operatorDatetime);
-        //    // r.modifyDatetime = record.modifyDatetime;
-        //    r.machineName = record.machineName;
-        //    r.LOTnumber = record.LOTnumber;
-        //    r.productCode = record.productCode;
-        //    return await _recordRepositoryAsync.UpdateAsync(r);
-        //}
 
     }
 }

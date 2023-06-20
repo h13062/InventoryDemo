@@ -12,3 +12,17 @@ D:\C#-Concept\InventoryDemo\InventoryDemo.Core\obj\Debug\net6.0\refint\Inventory
 D:\C#-Concept\InventoryDemo\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.pdb
 D:\C#-Concept\InventoryDemo\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.genruntimeconfig.cache
 D:\C#-Concept\InventoryDemo\InventoryDemo.Core\obj\Debug\net6.0\ref\InventoryDemo.Core.dll
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\bin\Debug\net6.0\InventoryDemo.Core.deps.json
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\bin\Debug\net6.0\InventoryDemo.Core.runtimeconfig.json
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\bin\Debug\net6.0\InventoryDemo.Core.dll
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\bin\Debug\net6.0\InventoryDemo.Core.pdb
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.csproj.AssemblyReference.cache
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.AssemblyInfoInputs.cache
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.AssemblyInfo.cs
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.csproj.CoreCompileInputs.cache
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.dll
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\refint\InventoryDemo.Core.dll
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.pdb
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\InventoryDemo.Core.genruntimeconfig.cache
+D:\C#-Concept\InventoryDemo\InventoryDemoBackend\InventoryDemo.Core\obj\Debug\net6.0\ref\InventoryDemo.Core.dll

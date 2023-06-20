@@ -7,34 +7,35 @@ namespace InventoryDemoAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecordController : ControllerBase
+    public class MaterialController : ControllerBase
     {
-        private readonly IRecordServiceAsync recordServiceAsync;
-        public RecordController(IRecordServiceAsync recordServiceAsync)
+        private readonly IMaterialServiceAsync materialServiceAsync;
+        public MaterialController(IMaterialServiceAsync materialServiceAsync)
         {
-            this.recordServiceAsync = recordServiceAsync;
+            this.materialServiceAsync = materialServiceAsync;
         }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await recordServiceAsync.GetAllAsync());
+            return Ok(await materialServiceAsync.GetAllMaterialAsync());
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            var result = await recordServiceAsync.GetByIdAsync(id);
+            var result = await materialServiceAsync.GetByMaterialIdAsync(id);
             if (result == null)
             {
-                return NotFound($"Record object with Id = {id} is not available");
+                return NotFound($"Material object with Id = {id} is not available");
             }
             return Ok(result);
         }
         [HttpPost]
-        public async Task<IActionResult> Post(RecordRequestModel model)
+        public async Task<IActionResult> Post(MaterialRequestModel model)
         {
-            var result = await recordServiceAsync.AddRecordAsync(model);
+            var result = await materialServiceAsync.AddMaterialAsync(model);
             if (result != 0)
             {
                 return Ok(model);
@@ -45,10 +46,10 @@ namespace InventoryDemoAPI.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await recordServiceAsync.DeleteByIdAsync(id);
+            var result = await materialServiceAsync.DeleteByMaterialIdAsync(id);
             if (result != 0)
             {
-                return Ok("Record was Deleted Successfully");
+                return Ok("Material was Deleted Successfully");
             }
             return BadRequest();
         }

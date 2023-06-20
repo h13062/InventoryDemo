@@ -12,9 +12,9 @@ namespace InventoryDemo.Infrastructure.Repository
     public class MachineRepositoryAsync : BaseRepository<Machines>, IMachineRepositoryAsync
     {
         private readonly InventoryDemoDbContext _db;
-        public MachineRepositoryAsync(InventoryDemoDbContext db) : base(db)
+        public MachineRepositoryAsync(InventoryDemoDbContext dbContext) : base(dbContext)
         {
-            _db = db;
+            _db = dbContext;
         }
     }
 }
