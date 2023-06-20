@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace InventoryDemo.Infrastructure.Repository
 {
-    public class RecordRepositoryAsync : BaseRepository<Records>, IRecordRepositoryAsync
+    public class MachineRepositoryAsync : BaseRepository<Machines>, IMachineRepositoryAsync
     {
         private readonly InventoryDemoDbContext _db;
-        public RecordRepositoryAsync(InventoryDemoDbContext dbContext) : base(dbContext)
+        public MachineRepositoryAsync(InventoryDemoDbContext db) : base(db)
         {
-            _db = dbContext;
+            _db = db;
         }
     }
 }
