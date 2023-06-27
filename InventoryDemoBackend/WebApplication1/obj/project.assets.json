@@ -2320,11 +2320,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\WebApplication1\\InventoryDemoAPI.csproj",
+      "projectUniqueName": "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\WebApplication1\\InventoryDemoAPI.csproj",
       "projectName": "InventoryDemoAPI",
-      "projectPath": "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\WebApplication1\\InventoryDemoAPI.csproj",
+      "projectPath": "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\WebApplication1\\InventoryDemoAPI.csproj",
       "packagesPath": "C:\\Users\\bgh15\\.nuget\\packages\\",
-      "outputPath": "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\WebApplication1\\obj\\",
+      "outputPath": "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2345,11 +2345,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Core\\InventoryDemo.Core.csproj": {
-              "projectPath": "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Core\\InventoryDemo.Core.csproj"
+            "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Core\\InventoryDemo.Core.csproj": {
+              "projectPath": "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Core\\InventoryDemo.Core.csproj"
             },
-            "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Infrastruture\\InventoryDemo.Infrastructure.csproj": {
-              "projectPath": "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Infrastruture\\InventoryDemo.Infrastructure.csproj"
+            "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Infrastruture\\InventoryDemo.Infrastructure.csproj": {
+              "projectPath": "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Infrastruture\\InventoryDemo.Infrastructure.csproj"
             }
           }
         }

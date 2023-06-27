@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CvO57OyBEPOMLaWAn6HlG88/UgG6EMQpTj3exDEoNSBreSbcUsXNZ/Ks2sLd0Vbc2RG3hc43dIa2ECuUD/h4pw==",
+  "dgSpecHash": "8ebMBe3TGQHydpXr2DxAy2vCEv01Rpq6zvWU5h3WdQApBQtHNkeCxuOg/+HYNU3pNFefF0u+Jlvq5+0ssKhQeg==",
   "success": true,
-  "projectFilePath": "D:\\C#-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Infrastruture\\InventoryDemo.Infrastructure.csproj",
+  "projectFilePath": "D:\\C-shaft-Concept\\InventoryDemo\\InventoryDemoBackend\\InventoryDemo.Infrastruture\\InventoryDemo.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bgh15\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\bgh15\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
