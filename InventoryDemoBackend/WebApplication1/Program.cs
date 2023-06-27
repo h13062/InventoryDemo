@@ -32,6 +32,15 @@ builder.Services.AddScoped<IOperatorRepositoryAsync, OperatorRepositoryAsync>();
 builder.Services.AddScoped<IMachineServiceAsync, MachineServiceAsync>();
 builder.Services.AddScoped<IMaterialServiceAsync, MaterialServiceAsync>();
 builder.Services.AddScoped<IOperatorServiceAsync, OperatorServiceAsync>();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -43,7 +52,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();

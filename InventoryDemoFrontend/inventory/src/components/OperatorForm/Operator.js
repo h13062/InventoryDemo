@@ -1,5 +1,6 @@
 import React from "react";
 import { FormGroup, Label, Input } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function OperatorForm() {
   return (
@@ -9,6 +10,7 @@ function OperatorForm() {
       <FormGroup>
         <Label for="exampleSelect">Select</Label>
         <Input type="select" name="select" id="exampleSelect">
+          <option>Please select your name</option>
           <option>Henry</option>
           <option>Try</option>
           <option>To</option>
@@ -59,7 +61,10 @@ function OperatorForm() {
           />
         </FormGroup>
       </FormGroup>
+
+      <Link to="/">Back</Link>
     </div>
   );
 }
+
 export default OperatorForm;
