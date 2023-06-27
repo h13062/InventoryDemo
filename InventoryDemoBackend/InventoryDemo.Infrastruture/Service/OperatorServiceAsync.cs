@@ -19,7 +19,7 @@ namespace InventoryDemo.Infrastructure.Service
         }
         public async Task<int> AddOperatorAsync(OperatorRequestModel op)
         {
-            Operators o = new Operators();
+            Operator o = new Operator();
             o.OperatorId = op.OperatorId;
             o.OperatorName = op.OperatorName;
             return await _operatorRepositoryAsync.InsertAsync(o);
@@ -63,7 +63,7 @@ namespace InventoryDemo.Infrastructure.Service
 
         public async Task<int> UpdateOperatorAsync(OperatorRequestModel op)
         {
-            Operators o = new Operators();
+            Operator o = new Operator();
             o.OperatorId = op.OperatorId;
             o.OperatorName = op.OperatorName;
             return await _operatorRepositoryAsync.UpdateAsync(o);

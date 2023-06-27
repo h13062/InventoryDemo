@@ -22,7 +22,7 @@ namespace InventoryDemo.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("InventoryDemo.Core.Entities.Machines", b =>
+            modelBuilder.Entity("InventoryDemo.Core.Entities.Machine", b =>
                 {
                     b.Property<int>("MachineId")
                         .ValueGeneratedOnAdd()
@@ -32,8 +32,7 @@ namespace InventoryDemo.Infrastructure.Migrations
 
                     b.Property<string>("MachineName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MachineId");
 
@@ -50,15 +49,14 @@ namespace InventoryDemo.Infrastructure.Migrations
 
                     b.Property<string>("MaterialName")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MaterialId");
 
                     b.ToTable("Materials");
                 });
 
-            modelBuilder.Entity("InventoryDemo.Core.Entities.Operators", b =>
+            modelBuilder.Entity("InventoryDemo.Core.Entities.Operator", b =>
                 {
                     b.Property<int>("OperatorId")
                         .ValueGeneratedOnAdd()
@@ -68,15 +66,14 @@ namespace InventoryDemo.Infrastructure.Migrations
 
                     b.Property<string>("OperatorName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OperatorId");
 
                     b.ToTable("Operators");
                 });
 
-            modelBuilder.Entity("InventoryDemo.Core.Entities.Records", b =>
+            modelBuilder.Entity("InventoryDemo.Core.Entities.Record", b =>
                 {
                     b.Property<int>("POnumber")
                         .ValueGeneratedOnAdd()
@@ -92,11 +89,7 @@ namespace InventoryDemo.Infrastructure.Migrations
 
                     b.Property<string>("LOTnumber")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -109,85 +102,133 @@ namespace InventoryDemo.Infrastructure.Migrations
 
                     b.HasKey("POnumber");
 
-                    b.HasIndex("MaterialId");
-
                     b.ToTable("Records");
                 });
 
-            modelBuilder.Entity("MachinesRecords", b =>
+            modelBuilder.Entity("InventoryDemo.Core.Entities.RecordMachine", b =>
                 {
                     b.Property<int>("MachineId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RecordPOnumber")
+                    b.Property<int>("POnumber")
                         .HasColumnType("int");
 
-                    b.HasKey("MachineId", "RecordPOnumber");
+                    b.HasKey("MachineId", "POnumber");
 
-                    b.HasIndex("RecordPOnumber");
+                    b.HasIndex("POnumber");
 
-                    b.ToTable("MachineAndRecord", (string)null);
+                    b.ToTable("RecordMachines");
                 });
 
-            modelBuilder.Entity("OperatorsRecords", b =>
+            modelBuilder.Entity("InventoryDemo.Core.Entities.RecordMaterial", b =>
+                {
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("POnumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("MaterialId", "POnumber");
+
+                    b.HasIndex("POnumber");
+
+                    b.ToTable("RecordMaterials");
+                });
+
+            modelBuilder.Entity("InventoryDemo.Core.Entities.RecordOperator", b =>
                 {
                     b.Property<int>("OperatorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RecordPOnumber")
+                    b.Property<int>("POnumber")
                         .HasColumnType("int");
 
-                    b.HasKey("OperatorId", "RecordPOnumber");
+                    b.HasKey("OperatorId", "POnumber");
 
-                    b.HasIndex("RecordPOnumber");
+                    b.HasIndex("POnumber");
 
-                    b.ToTable("OperatorAndRecord", (string)null);
+                    b.ToTable("RecordOperators");
                 });
 
-            modelBuilder.Entity("InventoryDemo.Core.Entities.Records", b =>
+            modelBuilder.Entity("InventoryDemo.Core.Entities.RecordMachine", b =>
                 {
-                    b.HasOne("InventoryDemo.Core.Entities.Material", "Material")
-                        .WithMany("Record")
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Material");
-                });
-
-            modelBuilder.Entity("MachinesRecords", b =>
-                {
-                    b.HasOne("InventoryDemo.Core.Entities.Machines", null)
-                        .WithMany()
+                    b.HasOne("InventoryDemo.Core.Entities.Machine", "Machine")
+                        .WithMany("RecordMachines")
                         .HasForeignKey("MachineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventoryDemo.Core.Entities.Records", null)
-                        .WithMany()
-                        .HasForeignKey("RecordPOnumber")
+                    b.HasOne("InventoryDemo.Core.Entities.Record", "Record")
+                        .WithMany("RecordMachines")
+                        .HasForeignKey("POnumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Machine");
+
+                    b.Navigation("Record");
                 });
 
-            modelBuilder.Entity("OperatorsRecords", b =>
+            modelBuilder.Entity("InventoryDemo.Core.Entities.RecordMaterial", b =>
                 {
-                    b.HasOne("InventoryDemo.Core.Entities.Operators", null)
-                        .WithMany()
+                    b.HasOne("InventoryDemo.Core.Entities.Material", "Material")
+                        .WithMany("RecordMaterials")
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InventoryDemo.Core.Entities.Record", "Record")
+                        .WithMany("RecordMaterials")
+                        .HasForeignKey("POnumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Material");
+
+                    b.Navigation("Record");
+                });
+
+            modelBuilder.Entity("InventoryDemo.Core.Entities.RecordOperator", b =>
+                {
+                    b.HasOne("InventoryDemo.Core.Entities.Operator", "Operator")
+                        .WithMany("RecordOperators")
                         .HasForeignKey("OperatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventoryDemo.Core.Entities.Records", null)
-                        .WithMany()
-                        .HasForeignKey("RecordPOnumber")
+                    b.HasOne("InventoryDemo.Core.Entities.Record", "Record")
+                        .WithMany("RecordOperators")
+                        .HasForeignKey("POnumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Operator");
+
+                    b.Navigation("Record");
+                });
+
+            modelBuilder.Entity("InventoryDemo.Core.Entities.Machine", b =>
+                {
+                    b.Navigation("RecordMachines");
                 });
 
             modelBuilder.Entity("InventoryDemo.Core.Entities.Material", b =>
                 {
-                    b.Navigation("Record");
+                    b.Navigation("RecordMaterials");
+                });
+
+            modelBuilder.Entity("InventoryDemo.Core.Entities.Operator", b =>
+                {
+                    b.Navigation("RecordOperators");
+                });
+
+            modelBuilder.Entity("InventoryDemo.Core.Entities.Record", b =>
+                {
+                    b.Navigation("RecordMachines");
+
+                    b.Navigation("RecordMaterials");
+
+                    b.Navigation("RecordOperators");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryDemo.Core.Contract.Repositories
 {
-    public interface IMachineRepositoryAsync : IBaseRepository<Machines>
+    public interface IMachineRepositoryAsync : IBaseRepository<Machine>
     {
     }
 }

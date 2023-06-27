@@ -1,56 +1,80 @@
-﻿using InventoryDemo.Core.Contract.Services;
+﻿using InventoryDemo.Core.Entities;
 using InventoryDemo.Core.Models;
+using InventoryDemo.Infrastructure.Data;
+using InventoryDemo.Infrastructure.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryDemoAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/records")]
     public class RecordController : ControllerBase
     {
-        private readonly IRecordServiceAsync recordServiceAsync;
-        public RecordController(IRecordServiceAsync recordServiceAsync)
-        {
-            this.recordServiceAsync = recordServiceAsync;
-        }
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(await recordServiceAsync.GetAllAsync());
-        }
+        private readonly RecordServiceAsync _recordService;
+        private readonly InventoryDemoDbContext _dbContext;
 
-        [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        public RecordController(RecordServiceAsync recordService, InventoryDemoDbContext dbContext)
         {
-            var result = await recordServiceAsync.GetByIdAsync(id);
-            if (result == null)
-            {
-                return NotFound($"Record object with Id = {id} is not available");
-            }
-            return Ok(result);
+            _recordService = recordService;
+            _dbContext = dbContext;
         }
         [HttpPost]
-        public async Task<IActionResult> Post(RecordRequestModel model)
+        public IActionResult CreateRecord([FromBody] RecordRequestModel createRecordDto)
         {
-            var result = await recordServiceAsync.AddRecordAsync(model);
-            if (result != 0)
-            {
-                return Ok(model);
-            }
-            return BadRequest();
+            _recordService.CreateRecord(
+                createRecordDto.POnumber,
+                createRecordDto.OrderNumber,
+                createRecordDto.OrderDate,
+                createRecordDto.DueDate,
+                createRecordDto.CompleteDate,
+                createRecordDto.LOTnumber,
+                createRecordDto.ProductCode,
+                createRecordDto.OperatorIds,
+                createRecordDto.MachineIds,
+                createRecordDto.MaterialIds
+            );
+
+            return Ok();
         }
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet]
+        public IActionResult GetAllRecords()
         {
-            var result = await recordServiceAsync.DeleteByIdAsync(id);
-            if (result != 0)
+            var records = _recordService.GetAllRecords();
+
+            var recordResponseModels = records.Select(record => new RecordResponseModel
             {
-                return Ok("Record was Deleted Successfully");
-            }
-            return BadRequest();
+                POnumber = record.POnumber,
+                OrderNumber = record.OrderNumber,
+                OrderDate = record.OrderDate,
+                DueDate = record.DueDate,
+                CompleteDate = record.CompleteDate,
+                LOTnumber = record.LOTnumber,
+                ProductCode = record.ProductCode,
+                OperatorIds = _dbContext.RecordOperators
+                        .Where(ro => ro.POnumber == record.POnumber)
+                        .Select(ro => ro.OperatorId)
+                        .ToList(),
+                MachineIds = _dbContext.RecordMachines
+                        .Where(ro => ro.POnumber == record.POnumber)
+                        .Select(ro => ro.MachineId)
+                        .ToList(),
+                MaterialIds = _dbContext.RecordMaterials
+                        .Where(ro => ro.POnumber == record.POnumber)
+                        .Select(ro => ro.MaterialId)
+                        .ToList(),
+            }).ToList();
+
+            return Ok(recordResponseModels);
+        }
+
+
+        [HttpDelete("{POnumber}")]
+        public IActionResult DeleteRecord(int POnumber)
+        {
+            _recordService.DeleteRecord(POnumber);
+            return Ok();
         }
     }
+
 }

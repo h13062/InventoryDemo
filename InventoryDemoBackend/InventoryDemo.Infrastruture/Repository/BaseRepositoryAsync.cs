@@ -12,6 +12,7 @@ namespace InventoryDemo.Infrastructure.Repository
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly InventoryDemoDbContext _dbContext;
+
         public BaseRepository(InventoryDemoDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -19,9 +20,13 @@ namespace InventoryDemo.Infrastructure.Repository
 
         public async Task<int> DeleteAsync(int id)
         {
-            var result = await _dbContext.Set<T>().FindAsync(id);// where(x=>x.Id==id).FirstOrDefault()
-            _dbContext.Set<T>().Remove(result);
-            return await _dbContext.SaveChangesAsync();  //commit
+            var entity = await GetByIdAsync(id);
+            if (entity != null)
+            {
+                _dbContext.Set<T>().Remove(entity);
+                return await _dbContext.SaveChangesAsync();
+            }
+            return 0;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

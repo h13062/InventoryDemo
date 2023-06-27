@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InventoryDemo.Infrastructure.Repository
 {
-    public class MachineRepositoryAsync : BaseRepository<Machines>, IMachineRepositoryAsync
+    public class MachineRepositoryAsync : BaseRepository<Machine>, IMachineRepositoryAsync
     {
         private readonly InventoryDemoDbContext _db;
         public MachineRepositoryAsync(InventoryDemoDbContext dbContext) : base(dbContext)

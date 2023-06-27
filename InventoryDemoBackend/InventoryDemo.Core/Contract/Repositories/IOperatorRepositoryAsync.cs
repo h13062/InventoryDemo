@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryDemo.Core.Contract.Repositories
 {
-    public interface IOperatorRepositoryAsync : IBaseRepository<Operators>
+    public interface IOperatorRepositoryAsync : IBaseRepository<Operator>
     {
     }
 }

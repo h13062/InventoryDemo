@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryDemo.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,12 +10,15 @@ namespace InventoryDemo.Core.Models
 {
     public class RecordRequestModel
     {
-        public int POnumber { get; set; } //this is the ID to distinguish orders from others
+        public int POnumber { get; set; }
         public int OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime CompleteDate { get; set; }
         public string LOTnumber { get; set; }
         public int ProductCode { get; set; }
+        public List<int> OperatorIds { get; set; }
+        public List<int> MachineIds { get; set; }
+        public List<int> MaterialIds { get; set; }
     }
 }

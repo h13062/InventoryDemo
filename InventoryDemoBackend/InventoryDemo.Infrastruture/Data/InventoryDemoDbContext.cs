@@ -27,54 +27,62 @@ namespace InventoryDemo.Infrastructure.Data
         //public DbSet<Parts> JobCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Records>(entity =>
-            {
-                entity.HasKey(e => e.POnumber);
-                entity.Property(e => e.OrderNumber)
-                    .IsRequired();
-                entity.Property(e => e.LOTnumber)
-                    .IsRequired()
-                    .HasMaxLength(150);
-                entity.Property(e => e.ProductCode)
-                    .IsRequired();
-            });
+            modelBuilder.Entity<RecordOperator>()
+            .HasKey(ro => new { ro.OperatorId, ro.POnumber });
 
-            modelBuilder.Entity<Machines>(entity =>
-            {
-                entity.HasKey(e => e.MachineId);
-                entity.Property(e => e.MachineName)
-                    .IsRequired()
-                    .HasMaxLength(150);
-            });
-            modelBuilder.Entity<Material>(entity =>
-            {
-                entity.HasKey(e => e.MaterialId);
-                entity.Property(e => e.MaterialName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-            });
-            modelBuilder.Entity<Operators>(entity =>
-            {
-                entity.HasKey(e => e.OperatorId);
-                entity.Property(e => e.OperatorName)
-                    .IsRequired()
-                    .HasMaxLength(150);
-            });
-            modelBuilder.Entity<Records>()
-                .HasMany(e => e.Operator)
-                .WithMany(m => m.Record)
-                .UsingEntity(j => j.ToTable("OperatorAndRecord"));
-            modelBuilder.Entity<Records>()
-                .HasMany(e => e.Machine)
-                .WithMany(m => m.Record)
-                .UsingEntity(j => j.ToTable("MachineAndRecord"));
+            modelBuilder.Entity<RecordOperator>()
+                .HasOne(ro => ro.Operator)
+                .WithMany(o => o.RecordOperators)
+                .HasForeignKey(ro => ro.OperatorId);
+
+            modelBuilder.Entity<RecordOperator>()
+                .HasOne(ro => ro.Record)
+                .WithMany(r => r.RecordOperators)
+                .HasForeignKey(ro => ro.POnumber);
+
+            modelBuilder.Entity<RecordMachine>()
+                .HasKey(rm => new { rm.MachineId, rm.POnumber });
+
+            modelBuilder.Entity<RecordMachine>()
+                .HasOne(rm => rm.Machine)
+                .WithMany(m => m.RecordMachines)
+                .HasForeignKey(rm => rm.MachineId);
+
+            modelBuilder.Entity<RecordMachine>()
+                .HasOne(rm => rm.Record)
+                .WithMany(r => r.RecordMachines)
+                .HasForeignKey(rm => rm.POnumber);
+
+            modelBuilder.Entity<RecordMaterial>()
+                .HasKey(rmat => new { rmat.MaterialId, rmat.POnumber });
+
+            modelBuilder.Entity<RecordMaterial>()
+                .HasOne(rmat => rmat.Material)
+                .WithMany(m => m.RecordMaterials)
+                .HasForeignKey(rmat => rmat.MaterialId);
+
+            modelBuilder.Entity<RecordMaterial>()
+                .HasOne(rmat => rmat.Record)
+                .WithMany(r => r.RecordMaterials)
+                .HasForeignKey(rmat => rmat.POnumber);
+
+            modelBuilder.Entity<Record>()
+                .HasKey(r => r.POnumber);
+
+
+            // Other entity configurations
+
+            base.OnModelCreating(modelBuilder);
 
         }
-            
-        public DbSet<Records> Records { get; set; }
-        public DbSet<Operators> Operators { get; set; }
-        public DbSet<Machines> Machines { get; set; }
+
+        public DbSet<Operator> Operators { get; set; }
+        public DbSet<Machine> Machines { get; set; }
         public DbSet<Material> Materials { get; set; }
+        public DbSet<Record> Records { get; set; }
+        public DbSet<RecordMachine> RecordMachines { get; set; }
+        public DbSet<RecordOperator> RecordOperators { get; set; }
+        public DbSet<RecordMaterial> RecordMaterials { get; set; }
     }
 }
    

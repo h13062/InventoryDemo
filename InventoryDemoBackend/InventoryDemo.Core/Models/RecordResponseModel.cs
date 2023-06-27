@@ -9,12 +9,15 @@ namespace InventoryDemo.Core.Models
 {
     public class RecordResponseModel
     {
-        public int POnumber { get; set; } //this is the ID to distinguish orders from others
+        public int POnumber { get; set; }
         public int OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime CompleteDate { get; set; }
         public string LOTnumber { get; set; }
         public int ProductCode { get; set; }
+        public List<int> OperatorIds { get; set; }
+        public List<int> MachineIds { get; set; }
+        public List<int> MaterialIds { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace InventoryDemo.Infrastructure.Service
 
         public async Task<int> AddMachineAsync(MachineRequestModel machine)
         {
-            Machines m = new Machines();
+            Machine m = new Machine();
             m.MachineId = machine.MachineId;
             m.MachineName = machine.MachineName;
             return await _machineRepositoryAsync.InsertAsync(m);
@@ -65,7 +65,7 @@ namespace InventoryDemo.Infrastructure.Service
 
         public async Task<int> UpdateMachineAsync(MachineRequestModel machine)
         {
-            Machines m = new Machines();
+            Machine m = new Machine();
             m.MachineId = machine.MachineId;
             m.MachineName = machine.MachineName;
             return await _machineRepositoryAsync.UpdateAsync(m);

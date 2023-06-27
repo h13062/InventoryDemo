@@ -10,6 +10,6 @@ namespace InventoryDemo.Core.Entities
     {
         public int MaterialId { get; set; }
         public string MaterialName { get; set; }
-        public List<Records> Record { get; set; }
+        public List<RecordMaterial> RecordMaterials { get; set; }
     }
 }
